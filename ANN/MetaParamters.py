@@ -11,3 +11,11 @@ data=pd.read_csv(url,sep=";")
 # print(data.describe())
 for i in data.keys():
     print(f'{i} Ihas {len (np.unique(data[i]))} unique values')
+cols2zscore=data.keys()
+cols2zscore=cols2zscore.drop("quality")
+for col in cols2zscore:
+    mean=np.mean(data[col])
+    std=np.std(data[col])
+    data[col]=(data[col]-mean)/std
+print(data)
+
