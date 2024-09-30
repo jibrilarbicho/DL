@@ -82,3 +82,30 @@ convres = convolve2d(bathtub, HK, mode='same')
 ax[1, 1].imshow(convres, cmap='gray', vmin=0, vmax=0.01)
 
 plt.show()
+import torch
+import torch.nn.functional as F
+
+VK_t = torch.tensor(VK).view(1, 1, 3, 3).double()  
+HK_t = torch.tensor(HK).view(1, 1, 3, 3).double()
+bathtub_t = torch.tensor(bathtub).view(1, 1, bathtub.shape[0], bathtub.shape[1])  # Convert the image to a tensor
+
+print(VK_t.shape)  
+print(bathtub_t.shape) 
+C = F.conv2d(bathtub_t, VK_t)
+print(C.shape)  
+
+fig, ax = plt.subplots(2, 2, figsize=(16, 8)) 
+ax[0, 0].imshow(VK)
+ax[0, 0].set_title('Vertical kernel')
+
+ax[0, 1].imshow(HK)
+ax[0, 1].set_title('Horizontal kernel') 
+convres = F.conv2d(bathtub_t, VK_t)
+img = torch.squeeze(convres.detach())
+ax[1, 0].imshow(img, cmap='gray', vmin=0, vmax=.01)
+
+convres = F.conv2d(bathtub_t, HK_t)
+img = torch.squeeze(convres.detach())
+ax[1, 1].imshow(img, cmap='gray', vmin=0, vmax=.01)
+
+plt.show()
