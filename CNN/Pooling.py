@@ -23,3 +23,14 @@ print(f'3D image, 2D maxpool: {img3Pool2.shape}\n')
 
 img3Pool3 = p3(img3)
 print(f'3D image, 3D maxpool: {img3Pool3.shape}\n')
+littlenet = nn.Sequential(
+    nn.Conv2d(3, 10, 5, 3, 2),  # Convolution layer
+    nn.ReLU(),                  # Activation function
+    nn.AvgPool3d(3, 3),         # Average pool
+    nn.Flatten(),               # Flatten the image to a vector
+    nn.Linear(588, 1),          # Fully connected linear layer
+    nn.Sigmoid()                # Output activation
+)
+img=torch.rand(1,3,128,128)
+out=littlenet(img)
+print(out.shape)
