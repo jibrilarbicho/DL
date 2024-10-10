@@ -148,7 +148,7 @@ ax[0].set_xlabel('Epoch')
 ax[0].set_title('Model Loss')
 
 ax[1].plot(trainAcc,"s-",label="Train")
-ax[1].plot(test_data,"o-",label="Test")
+ax[1].plot(testAcc,"o-",label="Test")
 ax[1].set_ylabel('Accuracy (%) ')
 ax[1].set_xlabel('Epoch')
 ax[1].set_title(f'Final Model Test Accuracy :{testAcc[-1]:.2f}%')
